@@ -6,3 +6,13 @@ An *asynchronous* API made by FastAPI to grab contests' information from differe
 
 
 Will update things later
+
+
+# Installation
+
+```
+https://github.com/Nusab19/ContestsAPI
+cd ContestsAPI
+pip3 install -r requirements.txt
+uvicorn main:app --reload
+```
