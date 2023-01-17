@@ -5,7 +5,7 @@ An *asynchronous* API made by FastAPI to grab contests' information from differe
 /docs - Gives you the auto-generated documentation.
 
 
-Will update things later
+Live API: https://api.nusab.repl.co
 
 
 # Installation
