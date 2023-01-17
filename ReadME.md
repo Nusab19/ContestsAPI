@@ -1,15 +1,18 @@
 
-An *asynchronous* API made by FastAPI to grab contests' information from different platforms.
+### An *asynchronous* API made with FastAPI to grab contests' information from different platforms.
 
 # Endpoints
-/docs - Gives you the auto-generated documentation.
+`/docs` - Documentation.
+`/platforms` - All available platforms
+`/atcoder` - Contests of **Atcoder**
+`/codeforces` - Contests of **Codeforces**
+`/hackerearth` - Contests of **HackerEarth**
 
 
 Live API: https://api.nusab.repl.co
 
 
 # Installation
-
 ```
 git clone https://github.com/Nusab19/ContestsAPI
 cd ContestsAPI
