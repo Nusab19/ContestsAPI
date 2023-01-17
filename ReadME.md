@@ -1,7 +1,7 @@
 
 An *asynchronous* API made by FastAPI to grab contests' information from different platforms.
 
-#Endpoints
+# Endpoints
 /docs - Gives you the auto-generated documentation.
 
 
