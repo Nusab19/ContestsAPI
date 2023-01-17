@@ -2,22 +2,11 @@ from fastapi import FastAPI
 
 from platforms import atcoder, codeforces, hackerearth
 
-import httpx, asyncio
+import httpx, asyncio, uvicorn
 
 
 
-HTTPX_CLIENT = {"ses":httpx.AsyncClient(timeout=300)}
-
-async def changeSession():
-    while 1:
-        await HTTPX_CLIENT.get("ses").aclose()
-        HTTPX_CLIENT["ses"] = httpx.AsyncClient(timeout=300)
-        await asyncio.sleep(33*60) # 33 minutes interval
-
-asyncio.create_task(changeSession())
-    
-    
-
+HTTPX_CLIENT = httpx.AsyncClient(timeout=300)
 
 
 app = FastAPI()
@@ -49,7 +38,7 @@ async def platformNames():
 
 @app.get("/all")
 async def allPlatformContests():
-    ses = HTTPX_CLIENT.get("ses")
+    ses = HTTPX_CLIENT
     data = {"ok": True}
     try:
         data["atcoder"] = atcoder.getContests(ses)
@@ -72,7 +61,7 @@ async def allPlatformContests():
 @app.get("/atcoder")
 @app.get("/1")
 async def atcoderContests():
-    ses = HTTPX_CLIENT.get("ses")
+    ses = HTTPX_CLIENT
     try:
         return atcoder.getContests(ses)
     except Exception as e:
@@ -93,9 +82,21 @@ async def codeforcesContests():
 @app.get("/hackereaeth")
 @app.get("/3")
 async def hackerEarthContests():
-    ses = HTTPX_CLIENT.get("ses")
+    ses = HTTPX_CLIENT
     try:
         return hackerearth.getContests(ses)
     except Exception as e:
         return {"ok":False, "message":"Failed to fetch contests", "error":str(e)}
     
+
+if __name__ == "__main__":
+    config = uvicorn.Config(
+        app=app,
+        host="0.0.0.0",
+        port=8080,
+        reload=True
+    )
+
+    server = uvicorn.Server(config=config)
+    server.run()
+
