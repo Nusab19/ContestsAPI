@@ -79,7 +79,7 @@ async def codeforcesContests():
         return {"ok":False, "message":"Failed to fetch contests", "error":str(e)}
 
 
-@app.get("/hackereaeth")
+@app.get("/hackerearth")
 @app.get("/3")
 async def hackerEarthContests():
     ses = HTTPX_CLIENT
