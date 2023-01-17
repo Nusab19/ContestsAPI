@@ -41,17 +41,17 @@ async def allPlatformContests():
     ses = HTTPX_CLIENT
     data = {"ok": True}
     try:
-        data["atcoder"] = atcoder.getContests(ses)
+        data["atcoder"] = await atcoder.getContests(ses)
     except:
         data["ok"] = False
     
     try:
-        data["codeforces"] = codeforces.getContests(ses)
+        data["codeforces"] = await codeforces.getContests(ses)
     except:
         data["ok"] = False
      
     try:
-        data["hackerearth"] = hackerearth.getContests(ses)
+        data["hackerearth"] = await hackerearth.getContests(ses)
     except:
         data["ok"] = False
     
@@ -63,7 +63,7 @@ async def allPlatformContests():
 async def atcoderContests():
     ses = HTTPX_CLIENT
     try:
-        return atcoder.getContests(ses)
+        return await atcoder.getContests(ses)
     except Exception as e:
         return {"ok":False, "message":"Failed to fetch contests", "error":str(e)}
 
@@ -74,7 +74,7 @@ async def atcoderContests():
 async def codeforcesContests():
     ses = HTTPX_CLIENT.get("ses")
     try:
-        return codeforces.getContests(ses)
+        return await codeforces.getContests(ses)
     except Exception as e:
         return {"ok":False, "message":"Failed to fetch contests", "error":str(e)}
 
@@ -84,7 +84,7 @@ async def codeforcesContests():
 async def hackerEarthContests():
     ses = HTTPX_CLIENT
     try:
-        return hackerearth.getContests(ses)
+        return await hackerearth.getContests(ses)
     except Exception as e:
         return {"ok":False, "message":"Failed to fetch contests", "error":str(e)}
     
