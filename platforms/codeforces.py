@@ -27,3 +27,4 @@ async def getContests(ses:httpx.AsyncClient):
                 allContests.append(contest)
     
     return allContests
+

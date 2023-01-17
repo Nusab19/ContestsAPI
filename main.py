@@ -72,7 +72,7 @@ async def atcoderContests():
 @app.get("/codeforces")
 @app.get("/2")
 async def codeforcesContests():
-    ses = HTTPX_CLIENT.get("ses")
+    ses = HTTPX_CLIENT
     try:
         return await codeforces.getContests(ses)
     except Exception as e:
