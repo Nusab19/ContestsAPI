@@ -13,6 +13,6 @@ Will update things later
 ```
 git clone https://github.com/Nusab19/ContestsAPI
 cd ContestsAPI
-pip3 install -r requirements.txt
+pip install -r requirements.txt
 uvicorn main:app --reload
 ```
