@@ -3,9 +3,13 @@
 
 # Endpoints
 `/docs` - Documentation.
+
 `/platforms` - All available platforms
+
 `/atcoder` - Contests of **Atcoder**
+
 `/codeforces` - Contests of **Codeforces**
+
 `/hackerearth` - Contests of **HackerEarth**
 
 
