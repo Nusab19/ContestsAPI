@@ -27,11 +27,12 @@ jobs:
         python -m pip install -U pip
         python -m pip install autopep8
         find -type f -name '*.py' ! -path '*/migrations/*' -exec autopep8 --in-place --aggressive --aggressive '{}' \;
-    - name: Push to github
+    - name: Create report file
+      run: date +%s > report.txt
+    - name: Commit report
       run: |
-        # python main.py 
         git config --global user.name "Nusab19"
-        git config --global user.email "nusabtaha33@gmail.com"
+        git config --global user.email "Nusab19@users.noreply.github.com"
         git add *
-        git commit -m "Checking"
+        git commit -am "Automated report"
         git push
