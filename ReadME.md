@@ -1,6 +1,13 @@
 
 ### An *asynchronous* API made with FastAPI to grab contests' information from different platforms.
 
+# Available Platforms 
+1. Atcoder 
+2. Codeforces 
+3. HackerEarth 
+
+
+
 # Endpoints
 `/docs` - Documentation.
 
