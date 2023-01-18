@@ -10,7 +10,7 @@ async def getContests(ses: httpx.AsyncClient):
     if r.status_code == 200:
         soup = BeautifulSoup(r.content, "html5lib")
         contests = soup.select("#contest-table-upcoming tbody tr")
-        
+
         for con in contests:
             ele = con.find_all("td")
             plat = "AtCoder"
