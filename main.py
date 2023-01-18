@@ -2,8 +2,9 @@ from fastapi import FastAPI
 
 from platforms import atcoder, codeforces, hackerearth
 
-import httpx, asyncio, uvicorn
-
+import httpx
+import asyncio
+import uvicorn
 
 
 HTTPX_CLIENT = httpx.AsyncClient(timeout=300)
@@ -31,6 +32,7 @@ Made using FastAPI with python3
 async def index():
     return {"message": welcomeMessage, "ok": True}
 
+
 @app.get("/platforms")
 async def platformNames():
     return {"message": platforms, "ok": True}
@@ -42,19 +44,19 @@ async def allPlatformContests():
     data = {"ok": True}
     try:
         data["atcoder"] = await atcoder.getContests(ses)
-    except:
+    except BaseException:
         data["ok"] = False
-    
+
     try:
         data["codeforces"] = await codeforces.getContests(ses)
-    except:
+    except BaseException:
         data["ok"] = False
-     
+
     try:
         data["hackerearth"] = await hackerearth.getContests(ses)
-    except:
+    except BaseException:
         data["ok"] = False
-    
+
     return data
 
 
@@ -65,8 +67,10 @@ async def atcoderContests():
     try:
         return await atcoder.getContests(ses)
     except Exception as e:
-        return {"ok":False, "message":"Failed to fetch contests", "error":str(e)}
-
+        return {
+            "ok": False,
+            "message": "Failed to fetch contests",
+            "error": str(e)}
 
 
 @app.get("/codeforces")
@@ -76,7 +80,10 @@ async def codeforcesContests():
     try:
         return await codeforces.getContests(ses)
     except Exception as e:
-        return {"ok":False, "message":"Failed to fetch contests", "error":str(e)}
+        return {
+            "ok": False,
+            "message": "Failed to fetch contests",
+            "error": str(e)}
 
 
 @app.get("/hackerearth")
@@ -86,8 +93,11 @@ async def hackerEarthContests():
     try:
         return await hackerearth.getContests(ses)
     except Exception as e:
-        return {"ok":False, "message":"Failed to fetch contests", "error":str(e)}
-    
+        return {
+            "ok": False,
+            "message": "Failed to fetch contests",
+            "error": str(e)}
+
 
 if __name__ == "__main__":
     config = uvicorn.Config(
@@ -99,4 +109,3 @@ if __name__ == "__main__":
 
     server = uvicorn.Server(config=config)
     server.run()
-
