@@ -30,7 +30,8 @@ jobs:
     - name: Push to github
       run: |
         # python main.py 
-        git config --global user.name "user mane"
-        git config --global user.email "user email"
-        git add &lt;pathspec&gt; git commit -m "Checking"
+        git config --global user.name "Nusab19"
+        git config --global user.email "nusabtaha33@gmail.com"
+        git add *
+        git commit -m "Checking"
         git push
