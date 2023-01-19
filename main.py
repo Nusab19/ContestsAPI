@@ -4,7 +4,6 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
 
 # Local Helpers
-from assets import cache
 from platforms import atcoder, codeforces, hackerearth
 
 import httpx
@@ -29,18 +28,17 @@ keyword_platforms = {
 }
 
 
-
 platform_funcs = {
-"1":atcoder.getContests,
-"2":codeforces.getContests,
-"3":hackerearth.getContests
+    "1": atcoder.getContests,
+    "2": codeforces.getContests,
+    "3": hackerearth.getContests
 }
 
 
 @app.on_event("startup")
 async def fx():
     await cacheOnStart()
-    scheduler.add_job(cacheOnStart, 'interval', seconds=7*60)
+    scheduler.add_job(cacheOnStart, 'interval', seconds=7 * 60)
     scheduler.start()
 
 
@@ -162,25 +160,20 @@ async def all_cached():
     return cachedData
 
 
-
-
-
 @app.get("/cached/{platform}")
 async def cached_result(platform: str):
     if platform in keyword_platforms:
         platform = keyword_platforms.get(platform)
-    
+
     if platform not in keyword_platforms.values():
-        return {"ok":False,
-        "message":f"`{platform}` is not in the available platform list.\nCheck the spelling or visit github.com/Nusab19/ContestsAPI"
-        }
-    
-    
-    
-    platform_id = {j:i for (i,j) in keyword_platforms.items()}.get(platform)
-    
+        return {
+            "ok": False,
+            "message": f"`{platform}` is not in the available platform list.\nCheck the spelling or visit github.com/Nusab19/ContestsAPI"}
+
+    platform_id = {j: i for (i, j) in keyword_platforms.items()}.get(platform)
+
     func = platform_funcs.get(platform_id)
-    
+
     try:
         data = await func(HTTPX_CLIENT)
         cachedData[platform] = data
@@ -190,8 +183,6 @@ async def cached_result(platform: str):
             "ok": False,
             "message": "Failed to fetch contests",
             "error": str(e)}
-    
-    
 
 
 if __name__ == "__main__":
