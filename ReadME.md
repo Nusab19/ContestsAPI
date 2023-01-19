@@ -11,8 +11,8 @@
 <p align="center">
 <img height="100px" src="https://te.legra.ph/file/8f3c11d29137158c58e6a.png">
 <br>
-<img height="77px" src="https://te.legra.ph/file/fd1d40f90734a028a1e76.png">
-<img height="77px" src="https://te.legra.ph/file/90ab43168f2152a1ea0e0.png">
+<img height="69px" src="https://te.legra.ph/file/fd1d40f90734a028a1e76.png">
+<img height="69px" src="https://te.legra.ph/file/90ab43168f2152a1ea0e0.png">
 </p>
 
 
