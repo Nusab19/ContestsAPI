@@ -36,7 +36,8 @@ The structure is like:
 
 Example:
 
-<a href="https://api.nusab.repl.co/cached/all" target="_blank">api.nusab.repl.co/cached/all</a>
+https://api.nusab.repl.co/cached/all
+
 Just put the method's name after <code>/cached/</code>.
 
 
@@ -52,14 +53,12 @@ Just put the method's name after <code>/cached/</code>.
 
 <code>/hackerearth</code> or <code>/3</code> - Contests of <b>HackerEarth</b>
 
-<p>
-<a href="https://api.nusab.repl.co/" target="_blank">api.nusab.repl.co/</a>
-</p>
+<p>Live API: https://api.nusab.repl.co</p>
 
 <h1>Installation</h1>
 
 
-  <pre>git clone https://github.com/Nusab19/ContestsAPI
+<pre>git clone https://github.com/Nusab19/ContestsAPI
 cd ContestsAPI
 pip install -r requirements.txt
 python main.py</pre>
