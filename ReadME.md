@@ -52,7 +52,9 @@ Just put the method's name after <code>/cached/</code>.
 
 <code>/hackerearth</code> or <code>/3</code> - Contests of <b>HackerEarth</b>
 
+<p>
 <a href="https://api.nusab.repl.co/" target="_blank">api.nusab.repl.co/</a>
+</p>
 
 <h1>Installation</h1>
 
