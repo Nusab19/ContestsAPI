@@ -33,16 +33,22 @@ The structure is like:
 
 Example:
 
-<code>api.nusab.repl.co/cached/all</code>
+https://api.nusab.repl.co/cached/all
 Just put the method's name after <code>/cached/</code>.
 
 
 <h1>Direct Endpoints (methods):</h1>
-<p><code>/all</code> - Contests from all Platformsplatforms</p>
-<p><strong>Note:</strong> The response will be very slow as this method makes http requests to all the platforms. Use <code>/cached/all</code> instead.</p>
-<p><code>/atcoder</code> or <code>/1</code> - Contests of <strong>Atcoder</strong></p>
-<p><code>/codeforces</code> or <code>/2</code> - Contests of <strong>Codeforces</strong></p>
-<p><code>/hackerearth</code> or <code>/3</code> - Contests of <strong>HackerEarth</strong></p>
+
+<code>/all</code> - Contests from all Platforms
+
+<b>Note:</b> The response will be very slow as this method makes http requests to all the platforms. Use <code>/cached/all</code> instead.
+
+<code>/atcoder</code> or <code>/1</code> - Contests of <b>Atcoder</b>
+
+<code>/codeforces</code> or <code>/2</code> - Contests of <b>Codeforces</b>
+
+<code>/hackerearth</code> or <code>/3</code> - Contests of <b>HackerEarth</b>
+
 <p>Live API: https://api.nusab.repl.co</p>
 <h1>Installation</h1>
 
