@@ -36,7 +36,7 @@ The structure is like:
 
 Example:
 
-https://api.nusab.repl.co/cached/all
+<a href="https://api.nusab.repl.co/cached/all" target="_blank">api.nusab.repl.co/cached/all</a>
 Just put the method's name after <code>/cached/</code>.
 
 
@@ -52,7 +52,8 @@ Just put the method's name after <code>/cached/</code>.
 
 <code>/hackerearth</code> or <code>/3</code> - Contests of <b>HackerEarth</b>
 
-<p>Live API: https://api.nusab.repl.co</p>
+<a href="https://api.nusab.repl.co/" target="_blank">api.nusab.repl.co/</a>
+
 <h1>Installation</h1>
 
 
