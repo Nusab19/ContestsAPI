@@ -19,6 +19,7 @@
 <h1>Endpoints</h1>
 
 <code>/docs</code> - Documentation.
+
 <code>/platforms</code> - All available Platforms
 
 <p>As this API needs to make http requests fetches data, there <i>will</i> be some delay. So, I made a solution for that.
