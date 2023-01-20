@@ -4,6 +4,11 @@
 <img height="300px" src="https://te.legra.ph/file/46a2556c0bb2e9ad90e94.jpg">
 </p>
 
+<a target="_blank" href="https://github.com/Nusab19/ContestsAPI"><img src="https://img.shields.io/github/stars/Nusab19/ContestsAPI"/></a>
+<a target="_blank" href="https://github.com/Nusab19/ContestsAPI"><img src="https://img.shields.io/github/last-commit/Nusab19/ContestsAPI" />
+</a>
+
+
 <h1>Available Platforms</h1>
 
 <ol>
