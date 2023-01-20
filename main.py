@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, FileResponse
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from datetime import datetime
 
@@ -54,6 +54,7 @@ async def cacheOnStart():
     print(f"Cached Data at {datetime.now()}")
 
 
+# Index / root
 @app.get("/")
 async def index():
     welcomeMessage = """
@@ -77,9 +78,19 @@ async def custom_404_handler(*_):
     return JSONResponse(status_code=404, content=say)
 
 
+# favicon.ico
+@app.get('/favicon.ico', include_in_schema=False)
+async def favicon():
+    return FileResponse("Images/favicon.ico")
+
+
+# Platform Names
 @app.get("/platforms")
 async def platformNames():
-    return {"message": keyword_platforms.values(), "ok": True}
+    return {
+        "message": keyword_platforms.values(),
+        "ok": True,
+        "data": keyword_platforms.items()}
 
 
 @app.get("/all")
