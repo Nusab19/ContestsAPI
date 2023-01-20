@@ -1,14 +1,16 @@
-
 from fastapi import FastAPI
+from fastapi.responses import JSONResponse
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
+from datetime import datetime
 
-
-# Local Helpers
-from platforms import atcoder, codeforces, hackerearth
 
 import httpx
 import asyncio
 import uvicorn
+
+
+# Local Assets
+from platforms import atcoder, codeforces, hackerearth
 
 
 HTTPX_CLIENT = httpx.AsyncClient(timeout=300)
@@ -43,17 +45,18 @@ async def fx():
 
 
 async def cacheOnStart():
-    cachedData["atcoder"] = await atcoder.getContests(HTTPX_CLIENT)
+    x = [i(HTTPX_CLIENT) for i in platform_funcs.values()]
+    x = await asyncio.gather(*x)
+    y = keyword_platforms.values()
 
-    cachedData["codeforces"] = await codeforces.getContests(HTTPX_CLIENT)
+    cachedData.update(dict(zip(y, x)))
 
-    cachedData["hackerearth"] = await hackerearth.getContests(HTTPX_CLIENT)
-    print("Cached")
+    print(f"Cached Data at {datetime.now()}")
 
 
-platforms = "atcoder codeforces hackerearth".split()
-
-welcomeMessage = """
+@app.get("/")
+async def index():
+    welcomeMessage = """
 This API is created by Nusab Taha.
 
 For the docs, visit /docs endpoint.
@@ -62,39 +65,31 @@ More info at: https://github.com/Nusab19
 
 Made using FastAPI with python3
 
-
 """.strip()
 
-
-@app.get("/")
-async def index():
     return {"message": welcomeMessage, "ok": True}
+
+
+# 404 Exception
+@app.exception_handler(404)
+async def custom_404_handler(*_):
+    say = {"ok": False, "message": " Invalid Endpoint.\nWebPage not found 404"}
+    return JSONResponse(status_code=404, content=say)
 
 
 @app.get("/platforms")
 async def platformNames():
-    return {"message": platforms, "ok": True}
+    return {"message": keyword_platforms.values(), "ok": True}
 
 
 @app.get("/all")
 async def allPlatformContests():
-    ses = HTTPX_CLIENT
     data = {"ok": True}
-    try:
-        data["atcoder"] = await atcoder.getContests(ses)
+    x = [i(HTTPX_CLIENT) for i in platform_funcs.values()]
+    x = await asyncio.gather(*x)
+    y = keyword_platforms.values()
 
-    except BaseException:
-        data["ok"] = False
-
-    try:
-        data["codeforces"] = await codeforces.getContests(ses)
-    except BaseException:
-        data["ok"] = False
-
-    try:
-        data["hackerearth"] = await hackerearth.getContests(ses)
-    except BaseException:
-        data["ok"] = False
+    data.update(dict(zip(y, x)))
 
     try:
         return data
@@ -156,7 +151,8 @@ async def hackerEarthContests():
 
 @app.get("/cached/all")
 async def all_cached():
-    cachedData.update({"ok": True})
+    data = cachedData.copy()
+    data.update({"ok": True})
     return cachedData
 
 
