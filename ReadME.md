@@ -16,6 +16,7 @@
 <li>CodeChef</li>
 <li>Codeforces</li>
 <li>HackerEarth</li>
+<li>Toph</li>
 </ol>
 
 <p align="center">
@@ -24,7 +25,8 @@
 <br>
 <img height="100px" src="https://telegra.ph/file/bf1b768d37b0d2dabb049.png">
 <img height="100px" src="https://te.legra.ph/file/90ab43168f2152a1ea0e0.png">
-
+<br>
+<img height="77px" src="https://telegra.ph/file/78799a5bb917998a0af9b.png">
 </p>
 
 
@@ -89,6 +91,8 @@ Just put the method's name after <code>/cached/</code>.
 
 <code>/hackerearth</code> or <code>/4</code> - Contests of <b>HackerEarth</b>
 
+<code>/toph</code> or <code>/5</code> - Contests of <b>Toph</b>
+
 <p>Live API: https://api.nusab.repl.co</p>
 
 <h1>Installation</h1>
@@ -101,4 +105,8 @@ pip install -r requirements.txt
 python main.py
 ```
 
-Visit <code>localhost:5000</code> after running.
+Visit <code>localhost:5000</code> after running locally.
+
+Make sure to give a star if you like it! :D
+
+Made with ❤ by @Nusab19
