@@ -114,7 +114,7 @@ async def favicon():
 async def platformNames():
     data = {
         "ok": True,
-        "message": keyword_platforms.values(),
+        "message": list(keyword_platforms.values()),
         "data": dict(keyword_platforms.items())}
 
     return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
