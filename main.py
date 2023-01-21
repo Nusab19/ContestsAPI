@@ -134,7 +134,7 @@ async def atcoderContests():
 
     except Exception as e:
         data = formatError(e)
-        Response(content=json.dumps(data, indent=4, default=str),
+        return Response(content=json.dumps(data, indent=4, default=str),
                  media_type='application/json')
 
 
@@ -150,7 +150,7 @@ async def codeforcesContests():
 
     except Exception as e:
         data = formatError(e)
-        Response(content=json.dumps(data, indent=4, default=str),
+        return Response(content=json.dumps(data, indent=4, default=str),
                  media_type='application/json')
 
 
@@ -166,7 +166,7 @@ async def codechefContests():
 
     except Exception as e:
         data = formatError(e)
-        Response(content=json.dumps(data, indent=4, default=str),
+        return Response(content=json.dumps(data, indent=4, default=str),
                  media_type='application/json')
 
 
@@ -182,7 +182,7 @@ async def hackerEarthContests():
 
     except Exception as e:
         data = formatError(e)
-        Response(content=json.dumps(data, indent=4, default=str),
+        return Response(content=json.dumps(data, indent=4, default=str),
                  media_type='application/json')
 
 
@@ -213,7 +213,7 @@ async def cached_result(platform: str):
         return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
     except Exception as e:
         data = formatError(e)
-        Response(content=json.dumps(data, indent=4, default=str),
+        return Response(content=json.dumps(data, indent=4, default=str),
                  media_type='application/json')
 
 
