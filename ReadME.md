@@ -70,11 +70,11 @@ Just put the method's name after <code>/cached/</code>.
 <h1>Installation</h1>
 
 
-<pre>
+```
 git clone https://github.com/Nusab19/ContestsAPI
 cd ContestsAPI
 pip install -r requirements.txt
 python main.py
-</pre>
+```
 
 Visit <code>localhost:5000</code> after running.
