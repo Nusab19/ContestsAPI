@@ -63,7 +63,6 @@ platform_funcs = {
 
 @app.on_event("startup")
 async def fx():
-    return
     await cacheOnStart()
     scheduler.add_job(cacheOnStart, 'interval', seconds=7 * 60)
     scheduler.start()
