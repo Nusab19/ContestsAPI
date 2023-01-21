@@ -17,7 +17,26 @@ from platforms import atcoder, codechef, codeforces, hackerearth, toph
 HTTPX_CLIENT = httpx.AsyncClient(timeout=300)
 
 
-app = FastAPI()
+description = """
+A simple asynchronous API made with FastAPI that gives you the contests' details from different platforms. 🚀
+Made by: Nusab Taha ( @Nusab19 )
+"""
+
+app = FastAPI(
+    title="Contests API",
+    description=description,
+    version="1.0",
+    terms_of_service="https://github.com/Nusab19/ContestsAPI",
+    contact={
+        "name": "Nusab Taha",
+        "url": "https://nusab19.github.io",
+        "email": "nusabtaha33@gmail.com",
+    },
+    license_info={
+        "name": "MIT license",
+        "url": "https://github.com/Nusab19/ContestsAPI/blob/main/LICENSE.md",
+    }
+)
 
 scheduler = AsyncIOScheduler()
 
