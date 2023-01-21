@@ -26,16 +26,16 @@ cachedData = {}
 
 keyword_platforms = {
     "1": "atcoder",
-    "2": "codeforces",
-    "3": "codechef",
+    "2": "codechef",
+    "3": "codeforces",
     "4": "hackerearth"
 }
 
 
 platform_funcs = {
     "1": atcoder.getContests,
-    "2": codeforces.getContests,
-    "3": codechef.getContests,
+    "2": codechef.getContests,
+    "3": codeforces.getContests,
     "4": hackerearth.getContests
 }
 
@@ -138,24 +138,8 @@ async def atcoderContests():
                  media_type='application/json')
 
 
-@app.get("/codeforces")
-@app.get("/2")
-async def codeforcesContests():
-    try:
-        data = await codeforces.getContests(HTTPX_CLIENT)
-        try:
-            return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
-        finally:
-            cachedData["codeforces"] = data
-
-    except Exception as e:
-        data = formatError(e)
-        return Response(content=json.dumps(data, indent=4, default=str),
-                 media_type='application/json')
-
-
 @app.get("/codechef")
-@app.get("/3")
+@app.get("/2")
 async def codechefContests():
     try:
         data = await codechef.getContests(HTTPX_CLIENT)
@@ -163,6 +147,22 @@ async def codechefContests():
             return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
         finally:
             cachedData["codechef"] = data
+
+    except Exception as e:
+        data = formatError(e)
+        return Response(content=json.dumps(data, indent=4, default=str),
+                 media_type='application/json')
+
+
+@app.get("/codeforces")
+@app.get("/3")
+async def codeforcesContests():
+    try:
+        data = await codeforces.getContests(HTTPX_CLIENT)
+        try:
+            return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
+        finally:
+            cachedData["codeforces"] = data
 
     except Exception as e:
         data = formatError(e)

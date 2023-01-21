@@ -13,6 +13,7 @@
 
 <ol>
 <li>Atcoder</li>
+<li>CodeChef</li>
 <li>Codeforces</li>
 <li>HackerEarth</li>
 </ol>
@@ -47,9 +48,29 @@ The structure is like:
 
 Example:
 
-https://api.nusab.repl.co/cached/all
+https://api.nusab.repl.co/cached/2
+
+Response:
+<pre>
+[
+    {
+        "name": "Starters 79",
+        "contestUrl": "https://www.codechef.com/START79",
+        "startTime": "2023-02-22 02:30:00 UTC",
+        "duration": "3 hours."
+    },
+    {
+        "name": "Starters 78",
+        "contestUrl": "https://www.codechef.com/START78",
+        "startTime": "2023-02-15 02:30:00 UTC",
+        "duration": "3 hours."
+    }
+]
+</pre>
+
 
 Just put the method's name after <code>/cached/</code>.
+
 
 
 <h1>Direct Endpoints (methods):</h1>

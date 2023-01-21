@@ -23,7 +23,7 @@ async def getContests(ses: httpx.AsyncClient):
                 duration = f"0{con.get('durationSeconds') // 3600 }:00 hours."
                 contest = {
                     "name": name,
-                    "contestUrl": url,
+                    "url": url,
                     "startTime": startTime,
                     "duration": duration
                 }

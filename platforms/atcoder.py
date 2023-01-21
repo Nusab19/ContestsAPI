@@ -27,7 +27,7 @@ async def getContests(ses: httpx.AsyncClient):
 
             contest = {
                 "name": name,
-                "contestUrl": url,
+                "url": url,
                 "startTime": startTime,
                 "duration": duration
             }
