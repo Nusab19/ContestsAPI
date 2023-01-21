@@ -86,6 +86,7 @@ Just put the method's name after <code>/cached/</code>.
 <code>/codeforces</code> or <code>/2</code> - Contests of <b>Codeforces</b>
 
 <code>/codechef</code> or <code>/3</code> - Contests of <b>CodeChef</b>
+
 <code>/hackerearth</code> or <code>/4</code> - Contests of <b>HackerEarth</b>
 
 <p>Live API: https://api.nusab.repl.co</p>
