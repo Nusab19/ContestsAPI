@@ -1,4 +1,5 @@
-from fastapi import FastAPI
+import json
+from fastapi import FastAPI, Response
 from fastapi.responses import JSONResponse, FileResponse
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from datetime import datetime
@@ -10,7 +11,7 @@ import uvicorn
 
 
 # Local Assets
-from platforms import atcoder, codeforces, hackerearth
+from platforms import atcoder, codeforces, codechef, hackerearth
 
 
 HTTPX_CLIENT = httpx.AsyncClient(timeout=300)
@@ -26,14 +27,16 @@ cachedData = {}
 keyword_platforms = {
     "1": "atcoder",
     "2": "codeforces",
-    "3": "hackerearth"
+    "3": "codechef",
+    "4": "hackerearth"
 }
 
 
 platform_funcs = {
     "1": atcoder.getContests,
     "2": codeforces.getContests,
-    "3": hackerearth.getContests
+    "3": codechef.getContests,
+    "4": hackerearth.getContests
 }
 
 
@@ -68,7 +71,8 @@ Made using FastAPI with python3
 
 """.strip()
 
-    return {"message": welcomeMessage, "ok": True}
+    data = {"message": welcomeMessage, "ok": True}
+    return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
 
 
 # 404 Exception
@@ -87,10 +91,12 @@ async def favicon():
 # Platform Names
 @app.get("/platforms")
 async def platformNames():
-    return {
+    data = {
         "message": keyword_platforms.values(),
         "ok": True,
-        "data": keyword_platforms.items()}
+        "data": dict(keyword_platforms.items())}
+
+    return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
 
 
 @app.get("/all")
@@ -103,10 +109,17 @@ async def allPlatformContests():
     data.update(dict(zip(y, x)))
 
     try:
-        return data
+        return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
     finally:
         del data["ok"]
         cachedData.update(data)
+
+
+def formatError(e: Exception):
+    return {
+        "ok": False,
+        "message": "Failed to fetch contests",
+        "error": str(e)}
 
 
 @app.get("/atcoder")
@@ -115,15 +128,14 @@ async def atcoderContests():
     try:
         data = await atcoder.getContests(HTTPX_CLIENT)
         try:
-            return data
+            return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
         finally:
             cachedData["atcoder"] = data
 
     except Exception as e:
-        return {
-            "ok": False,
-            "message": "Failed to fetch contests",
-            "error": str(e)}
+        data = formatError(e)
+        Response(content=json.dumps(data, indent=4, default=str),
+                 media_type='application/json')
 
 
 @app.get("/codeforces")
@@ -132,39 +144,53 @@ async def codeforcesContests():
     try:
         data = await codeforces.getContests(HTTPX_CLIENT)
         try:
-            return data
+            return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
         finally:
             cachedData["codeforces"] = data
 
     except Exception as e:
-        return {
-            "ok": False,
-            "message": "Failed to fetch contests",
-            "error": str(e)}
+        data = formatError(e)
+        Response(content=json.dumps(data, indent=4, default=str),
+                 media_type='application/json')
+
+
+@app.get("/codechef")
+@app.get("/3")
+async def codechefContests():
+    try:
+        data = await codechef.getContests(HTTPX_CLIENT)
+        try:
+            return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
+        finally:
+            cachedData["codechef"] = data
+
+    except Exception as e:
+        data = formatError(e)
+        Response(content=json.dumps(data, indent=4, default=str),
+                 media_type='application/json')
 
 
 @app.get("/hackerearth")
-@app.get("/3")
+@app.get("/4")
 async def hackerEarthContests():
     try:
         data = await hackerearth.getContests(HTTPX_CLIENT)
         try:
-            return data
+            return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
         finally:
             cachedData["hackerearth"] = data
 
     except Exception as e:
-        return {
-            "ok": False,
-            "message": "Failed to fetch contests",
-            "error": str(e)}
+        data = formatError(e)
+        Response(content=json.dumps(data, indent=4, default=str),
+                 media_type='application/json')
 
 
 @app.get("/cached/all")
 async def all_cached():
     data = cachedData.copy()
     data.update({"ok": True})
-    return cachedData
+    return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
 
 
 @app.get("/cached/{platform}")
@@ -184,19 +210,18 @@ async def cached_result(platform: str):
     try:
         data = await func(HTTPX_CLIENT)
         cachedData[platform] = data
-        return data
+        return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
     except Exception as e:
-        return {
-            "ok": False,
-            "message": "Failed to fetch contests",
-            "error": str(e)}
+        data = formatError(e)
+        Response(content=json.dumps(data, indent=4, default=str),
+                 media_type='application/json')
 
 
 if __name__ == "__main__":
     config = uvicorn.Config(
         app=app,
         host="0.0.0.0",
-        port=8080,
+        port=5000,
         reload=True
     )
 

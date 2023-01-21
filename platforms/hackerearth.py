@@ -1,7 +1,7 @@
 import httpx
 import json
+import pytz
 from datetime import datetime
-from pytz import timezone
 
 
 async def getContests(ses: httpx.AsyncClient, limit: int = None):
@@ -14,7 +14,7 @@ async def getContests(ses: httpx.AsyncClient, limit: int = None):
         for con in contests:
             plat = "HackerEarth"
             if con["status"] == "UPCOMING":
-                contestName = con["title"]
+                name = con["title"]
                 url = con["url"]
                 start = con["start_tz"][: con["start_tz"].rindex(
                     ':')] + con["start_tz"][con["start_tz"].rindex(':') + 1:]
@@ -22,8 +22,7 @@ async def getContests(ses: httpx.AsyncClient, limit: int = None):
                 end = con["end_tz"].replace(" ", "T")
                 try:
                     startTime = datetime.strptime(
-                        start, '%Y-%m-%dT%H:%M:%S%z').astimezone(
-                        timezone('Asia/Kolkata')).strftime('%Y-%m-%dT%H:%M:%S%z')
+                        start, '%Y-%m-%dT%H:%M:%S%z').astimezone(pytz.utc).strftime('%Y-%m-%dT%H:%M:%S%z')
                     td = datetime.strptime(
                         end, '%Y-%m-%dT%H:%M:%S%z') - datetime.strptime(start, '%Y-%m-%dT%H:%M:%S%z')
                     if td.days and td.seconds:
@@ -45,8 +44,10 @@ async def getContests(ses: httpx.AsyncClient, limit: int = None):
                             mins = (td.seconds // 60) % 60
                         duration = f"{hours} : {mins} hours."
 
+                    startTime = startTime.replace('T', ' ')[:-5]
+
                     contest = {
-                        "contestName": contestName,
+                        "name": name,
                         "contestUrl": url,
                         "startTime": startTime,
                         "duration": duration
@@ -55,7 +56,8 @@ async def getContests(ses: httpx.AsyncClient, limit: int = None):
                     if contest.get("duration"):
                         allContests.append(contest)
 
-                except BaseException:
+                except Exception as e:
+                    print(e)
                     continue
 
     return allContests

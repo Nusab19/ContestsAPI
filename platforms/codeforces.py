@@ -13,15 +13,16 @@ async def getContests(ses: httpx.AsyncClient):
         for con in contests:
             if con.get("phase") == "BEFORE":
                 plat = "CodeForces"
-                contestName = con["name"]
+                name = con["name"]
                 url = "https://codeforces.com/contests/" + str(con["id"])
                 startSec = con["startTimeSeconds"]
                 startTime = datetime.strftime(
-                    datetime.fromtimestamp(startSec),
-                    '%Y-%m-%dT%H:%M:%S') + '+0530'
-                duration = f"0{con.get('durationSeconds')//3600 }:00 hours."
+                    datetime.utcfromtimestamp(startSec),
+                    "%d-%m-%Y %H:%M:%S") + " UTC"
+
+                duration = f"0{con.get('durationSeconds') // 3600 }:00 hours."
                 contest = {
-                    "contestName": contestName,
+                    "name": name,
                     "contestUrl": url,
                     "startTime": startTime,
                     "duration": duration

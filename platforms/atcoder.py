@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
-import httpx
 from datetime import datetime
-from pytz import timezone
+import pytz
+import httpx
 
 
 async def getContests(ses: httpx.AsyncClient):
@@ -15,20 +15,18 @@ async def getContests(ses: httpx.AsyncClient):
             ele = con.find_all("td")
             plat = "AtCoder"
 
-            contestName = ele[1].text.strip()[
-                ele[1].text.strip().index("\n") + 1:]
+            name = " ".join(ele[1].text.strip()[
+                            ele[1].text.strip().index("\n") + 1:].strip().split()[1:])
 
             url = "https://atcoder.jp" + ele[1].select("a")[0].get("href")
 
             startTime = datetime.strptime(
                 ele[0].text.replace(
-                    " ", "T"), '%Y-%m-%dT%H:%M:%S%z').astimezone(
-                timezone('Asia/Kolkata')).strftime('%Y-%m-%dT%H:%M:%S%z')
-
+                    " ", "T"), '%Y-%m-%dT%H:%M:%S%z').astimezone(pytz.utc).strftime("%d-%m-%Y %H:%M:%S")
             duration = ele[2].text + " hours."
 
             contest = {
-                "contestName": contestName,
+                "name": name,
                 "contestUrl": url,
                 "startTime": startTime,
                 "duration": duration

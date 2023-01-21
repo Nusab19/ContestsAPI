@@ -29,6 +29,8 @@
 
 <code>/docs</code> - Documentation.
 
+<b>Note</b>: All responses are in <i>json</i> and beautified.
+
 <code>/platforms</code> - All available Platforms
 
 <p>As this API needs to make http requests fetches data, there <i>will</i> be some delay. So, I made a solution for that.
@@ -60,14 +62,19 @@ Just put the method's name after <code>/cached/</code>.
 
 <code>/codeforces</code> or <code>/2</code> - Contests of <b>Codeforces</b>
 
-<code>/hackerearth</code> or <code>/3</code> - Contests of <b>HackerEarth</b>
+<code>/codechef</code> or <code>/3</code> - Contests of <b>CodeChef</b>
+<code>/hackerearth</code> or <code>/4</code> - Contests of <b>HackerEarth</b>
 
 <p>Live API: https://api.nusab.repl.co</p>
 
 <h1>Installation</h1>
 
 
-<pre>git clone https://github.com/Nusab19/ContestsAPI
+<pre>
+git clone https://github.com/Nusab19/ContestsAPI
 cd ContestsAPI
 pip install -r requirements.txt
-python main.py</pre>
+python main.py
+</pre>
+
+Visit <code>localhost:5000</code> after running.
