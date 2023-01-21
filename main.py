@@ -92,7 +92,7 @@ Made using FastAPI with python3
 
 """.strip()
 
-    data = {"message": welcomeMessage, "ok": True}
+    data = {"ok": True, "message": welcomeMessage}
     return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
 
 
@@ -113,8 +113,8 @@ async def favicon():
 @app.get("/platforms")
 async def platformNames():
     data = {
-        "message": keyword_platforms.values(),
         "ok": True,
+        "message": keyword_platforms.values(),
         "data": dict(keyword_platforms.items())}
 
     return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
@@ -147,7 +147,8 @@ def formatError(e: Exception):
 @app.get("/1")
 async def atcoderContests():
     try:
-        data = await atcoder.getContests(HTTPX_CLIENT)
+        data = {"ok": True}
+        data.update(await atcoder.getContests(HTTPX_CLIENT))
         try:
             return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
         finally:
@@ -163,7 +164,8 @@ async def atcoderContests():
 @app.get("/2")
 async def codechefContests():
     try:
-        data = await codechef.getContests(HTTPX_CLIENT)
+        data = {"ok": True}
+        data.update(await codechef.getContests(HTTPX_CLIENT))
         try:
             return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
         finally:
@@ -179,7 +181,8 @@ async def codechefContests():
 @app.get("/3")
 async def codeforcesContests():
     try:
-        data = await codeforces.getContests(HTTPX_CLIENT)
+        data = {"ok": True}
+        data.update(await codeforces.getContests(HTTPX_CLIENT))
         try:
             return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
         finally:
@@ -195,7 +198,8 @@ async def codeforcesContests():
 @app.get("/4")
 async def hackerEarthContests():
     try:
-        data = await hackerearth.getContests(HTTPX_CLIENT)
+        data = {"ok": True}
+        data.update(await hackerearth.getContests(HTTPX_CLIENT))
         try:
             return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
         finally:
@@ -211,7 +215,8 @@ async def hackerEarthContests():
 @app.get("/5")
 async def tophContests():
     try:
-        data = await hackerearth.getContests(HTTPX_CLIENT)
+        data = {"ok": True}
+        data.update(await toph.getContests(HTTPX_CLIENT))
         try:
             return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
         finally:
@@ -225,8 +230,8 @@ async def tophContests():
 
 @app.get("/cached/all")
 async def all_cached():
-    data = cachedData.copy()
-    data.update({"ok": True})
+    data = {"ok": True}
+    data.update(cachedData.copy())
     return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
 
 
@@ -245,9 +250,13 @@ async def cached_result(platform: str):
     func = platform_funcs.get(platform_id)
 
     try:
-        data = await func(HTTPX_CLIENT)
-        cachedData[platform] = data
-        return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
+        data = {"ok": True}
+        data.update(await func(HTTPX_CLIENT))
+        try:
+            return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
+        finally:
+            del data["ok"]
+            cachedData[platform] = data
     except Exception as e:
         data = formatError(e)
         return Response(content=json.dumps(data, indent=4, default=str),
