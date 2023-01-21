@@ -148,7 +148,8 @@ def formatError(e: Exception):
 async def atcoderContests():
     try:
         data = {"ok": True}
-        data.update(await atcoder.getContests(HTTPX_CLIENT))
+        x = await atcoder.getContests(HTTPX_CLIENT)
+        data.update({"data": x})
         try:
             return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
         finally:
@@ -165,7 +166,8 @@ async def atcoderContests():
 async def codechefContests():
     try:
         data = {"ok": True}
-        data.update(await codechef.getContests(HTTPX_CLIENT))
+        x = await codechef.getContests(HTTPX_CLIENT)
+        data.update({"data": x})
         try:
             return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
         finally:
@@ -182,7 +184,8 @@ async def codechefContests():
 async def codeforcesContests():
     try:
         data = {"ok": True}
-        data.update(await codeforces.getContests(HTTPX_CLIENT))
+        x = await codeforces.getContests(HTTPX_CLIENT)
+        data.update({"data": x})
         try:
             return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
         finally:
@@ -199,7 +202,8 @@ async def codeforcesContests():
 async def hackerEarthContests():
     try:
         data = {"ok": True}
-        data.update(await hackerearth.getContests(HTTPX_CLIENT))
+        x = await hackerearth.getContests(HTTPX_CLIENT)
+        data.update({"data": x})
         try:
             return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
         finally:
@@ -216,7 +220,8 @@ async def hackerEarthContests():
 async def tophContests():
     try:
         data = {"ok": True}
-        data.update(await toph.getContests(HTTPX_CLIENT))
+        x = await toph.getContests(HTTPX_CLIENT)
+        data.update({"data": x})
         try:
             return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
         finally:
@@ -251,7 +256,8 @@ async def cached_result(platform: str):
 
     try:
         data = {"ok": True}
-        data.update(await func(HTTPX_CLIENT))
+        x = await func(HTTPX_CLIENT)
+        data.update({"data": x})
         try:
             return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
         finally:
