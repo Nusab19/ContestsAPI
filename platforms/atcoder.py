@@ -2,14 +2,20 @@ from bs4 import BeautifulSoup
 from datetime import datetime
 import pytz
 import httpx
+import asyncio
+
+
+def extract_data(r):
+    soup = BeautifulSoup(r.content, "html5lib")
+    return soup.select("#contest-table-upcoming tbody tr")
 
 
 async def getContests(ses: httpx.AsyncClient):
     r = await ses.get("https://atcoder.jp/contests/")
     allContests = []
+    loop = asyncio.get_event_loop()
     if r.status_code == 200:
-        soup = BeautifulSoup(r.content, "html5lib")
-        contests = soup.select("#contest-table-upcoming tbody tr")
+        contests = await loop.run_in_executor(None, extract_data, r)
 
         for con in contests:
             ele = con.find_all("td")

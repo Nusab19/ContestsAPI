@@ -11,7 +11,7 @@ import uvicorn
 
 
 # Local Assets
-from platforms import atcoder, codeforces, codechef, hackerearth
+from platforms import atcoder, codechef, codeforces, hackerearth, toph
 
 
 HTTPX_CLIENT = httpx.AsyncClient(timeout=300)
@@ -28,7 +28,8 @@ keyword_platforms = {
     "1": "atcoder",
     "2": "codechef",
     "3": "codeforces",
-    "4": "hackerearth"
+    "4": "hackerearth",
+    "5": "toph"
 }
 
 
@@ -36,7 +37,8 @@ platform_funcs = {
     "1": atcoder.getContests,
     "2": codechef.getContests,
     "3": codeforces.getContests,
-    "4": hackerearth.getContests
+    "4": hackerearth.getContests,
+    "5": toph.getContests
 }
 
 
@@ -135,7 +137,7 @@ async def atcoderContests():
     except Exception as e:
         data = formatError(e)
         return Response(content=json.dumps(data, indent=4, default=str),
-                 media_type='application/json')
+                        media_type='application/json')
 
 
 @app.get("/codechef")
@@ -151,7 +153,7 @@ async def codechefContests():
     except Exception as e:
         data = formatError(e)
         return Response(content=json.dumps(data, indent=4, default=str),
-                 media_type='application/json')
+                        media_type='application/json')
 
 
 @app.get("/codeforces")
@@ -167,7 +169,7 @@ async def codeforcesContests():
     except Exception as e:
         data = formatError(e)
         return Response(content=json.dumps(data, indent=4, default=str),
-                 media_type='application/json')
+                        media_type='application/json')
 
 
 @app.get("/hackerearth")
@@ -183,7 +185,23 @@ async def hackerEarthContests():
     except Exception as e:
         data = formatError(e)
         return Response(content=json.dumps(data, indent=4, default=str),
-                 media_type='application/json')
+                        media_type='application/json')
+
+
+@app.get("/toph")
+@app.get("/5")
+async def tophContests():
+    try:
+        data = await hackerearth.getContests(HTTPX_CLIENT)
+        try:
+            return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
+        finally:
+            cachedData["hackerearth"] = data
+
+    except Exception as e:
+        data = formatError(e)
+        return Response(content=json.dumps(data, indent=4, default=str),
+                        media_type='application/json')
 
 
 @app.get("/cached/all")
@@ -214,7 +232,7 @@ async def cached_result(platform: str):
     except Exception as e:
         data = formatError(e)
         return Response(content=json.dumps(data, indent=4, default=str),
-                 media_type='application/json')
+                        media_type='application/json')
 
 
 if __name__ == "__main__":
