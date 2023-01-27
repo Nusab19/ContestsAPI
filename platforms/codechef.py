@@ -19,6 +19,8 @@ async def getContests(ses: httpx.AsyncClient):
             name = con["name"]
             url = con["url"]
             startTime = con["start_time"]
+            startTime = datetime.strptime(
+                startTime, "%Y-%m-%d %H:%M:%S %Z").strftime("%d-%m-%y %H:%M:%S %Z")
             duration = f"{int(con['duration']) //3600} hours."
             contest = {
                 "name": name,
@@ -28,4 +30,4 @@ async def getContests(ses: httpx.AsyncClient):
             }
             allContests.append(contest)
 
-    return allContests
+    return allContests[::-1]

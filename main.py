@@ -143,8 +143,8 @@ def formatError(e: Exception):
         "error": str(e)}
 
 
-@app.get("/atcoder")
 @app.get("/1")
+@app.get("/atcoder")
 async def atcoderContests():
     try:
         data = {"ok": True}
@@ -161,8 +161,8 @@ async def atcoderContests():
                         media_type='application/json')
 
 
-@app.get("/codechef")
 @app.get("/2")
+@app.get("/codechef")
 async def codechefContests():
     try:
         data = {"ok": True}
@@ -179,8 +179,8 @@ async def codechefContests():
                         media_type='application/json')
 
 
-@app.get("/codeforces")
 @app.get("/3")
+@app.get("/codeforces")
 async def codeforcesContests():
     try:
         data = {"ok": True}
@@ -197,8 +197,8 @@ async def codeforcesContests():
                         media_type='application/json')
 
 
-@app.get("/hackerearth")
 @app.get("/4")
+@app.get("/hackerearth")
 async def hackerEarthContests():
     try:
         data = {"ok": True}
@@ -215,8 +215,8 @@ async def hackerEarthContests():
                         media_type='application/json')
 
 
-@app.get("/toph")
 @app.get("/5")
+@app.get("/toph")
 async def tophContests():
     try:
         data = {"ok": True}
@@ -225,7 +225,7 @@ async def tophContests():
         try:
             return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
         finally:
-            cachedData["hackerearth"] = data
+            cachedData["toph"] = data
 
     except Exception as e:
         data = formatError(e)
@@ -240,6 +240,54 @@ async def all_cached():
     return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
 
 
+@app.get("/cached/1")
+@app.get("/cached/atcoder")
+async def CachedAtcoderContests():
+    data = {"ok": True, "data": cachedData.get("atcoder")}
+    return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
+
+
+@app.get("/cached/2")
+@app.get("/cached/codechef")
+async def CachedCodechef():
+    data = {"ok": True, "data": cachedData.get("codechef")}
+    return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
+
+
+@app.get("/cached/3")
+@app.get("/cached/codeforces")
+async def CachedCodeforces():
+    data = {"ok": True, "data": cachedData.get("codeforces")}
+    return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
+
+
+@app.get("/cached/3")
+@app.get("/cached/codeforces")
+async def CachedCodeforces():
+    data = {"ok": True, "data": cachedData.get("codeforces")}
+    return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
+
+
+@app.get("/cached/4")
+@app.get("/cached/hackerearth")
+async def CachedHackerearth():
+    data = {"ok": True, "data": cachedData.get("hackerearth")}
+    return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
+
+
+@app.get("/cached/5")
+@app.get("/cached/toph")
+async def CachedToph():
+    data = {"ok": True, "data": cachedData.get("toph")}
+    return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
+
+
+# For some unknown reason (to me), the code below is having slow response problem.
+# It should NOT take long. But it does. So, commenting it.
+# And adding a lot of manual function declaration to make the response faster.
+# :")
+
+"""
 @app.get("/cached/{platform}")
 async def cached_result(platform: str):
     if platform in keyword_platforms:
@@ -267,6 +315,8 @@ async def cached_result(platform: str):
         data = formatError(e)
         return Response(content=json.dumps(data, indent=4, default=str),
                         media_type='application/json')
+
+"""
 
 
 if __name__ == "__main__":
