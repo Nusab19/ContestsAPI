@@ -324,7 +324,7 @@ async def cached_result(platform: str):
 _tempData = {"count": 0, "startTime": time.time()}
 
 
-@app.get("status")
+@app.get("/status")
 async def api_status():
     uptime = (time.time() - _tempData["startTime"])/3600
     reqCount = _tempData["count"]
