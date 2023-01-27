@@ -52,7 +52,7 @@ The structure is like:
 
 Example:
 
-https://api.nusab.repl.co/cached/2
+https://api.nusab.repl.co/cached/2   ( Same as `/cached/codechef`)
 
 Response:
 <pre>
