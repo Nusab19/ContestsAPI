@@ -34,7 +34,7 @@
 
 <code>/docs</code> - Documentation.
 
-<b>Note</b>: All responses are in <i>json</i> and beautified.
+<b>Note</b>: All responses are in <b>pretty<i>JSON</i></b> and beautified.
 
 <code>/platforms</code> - All available Platforms
 
