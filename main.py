@@ -5,6 +5,7 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from datetime import datetime
 
 
+import time
 import httpx
 import asyncio
 import uvicorn
@@ -317,6 +318,30 @@ async def cached_result(platform: str):
                         media_type='application/json')
 
 """
+
+# Just to get the overall status of the API
+
+_tempData = {"count": 0, "startTime": time.time()}
+
+
+@app.get("status")
+async def api_status():
+    uptime = (time.time() - _tempData["startTime"])/3600
+    reqCount = _tempData["count"]
+    data = {
+        "uptime": f"{uptime:.2f} hours.",
+        "requestsCount": reqCount
+    }
+    return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
+
+
+@app.middleware("http")
+async def add_process_time_header(request, func):
+    response = await func(request)
+    try:
+        return response
+    finally:
+        _tempData["count"] += 1
 
 
 if __name__ == "__main__":
