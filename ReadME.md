@@ -93,6 +93,8 @@ Just put the method's name after <code>/cached/</code>.
 
 <code>/toph</code> or <code>/5</code> - Contests of <b>Toph</b>
 
+<code>/status</code> - A brief status of the API. 
+
 <p>Live API: https://api.nusab.repl.co</p>
 
 <h1>Installation</h1>
