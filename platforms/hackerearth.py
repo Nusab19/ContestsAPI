@@ -44,7 +44,7 @@ async def getContests(ses: httpx.AsyncClient, limit: int = None):
                             mins = (td.seconds // 60) % 60
                         duration = f"{hours} : {mins} hours."
 
-                    startTime = startTime.replace('T', ' ')[:-5]
+                    startTime = startTime.replace('T', ' ')[:-5] + " UTC"
 
                     contest = {
                         "name": name,

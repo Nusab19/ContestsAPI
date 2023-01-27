@@ -28,7 +28,7 @@ async def getContests(ses: httpx.AsyncClient):
 
             startTime = datetime.strptime(
                 ele[0].text.replace(
-                    " ", "T"), '%Y-%m-%dT%H:%M:%S%z').astimezone(pytz.utc).strftime("%d-%m-%Y %H:%M:%S")
+                    " ", "T"), '%Y-%m-%dT%H:%M:%S%z').astimezone(pytz.utc).strftime("%d-%m-%Y %H:%M:%S") + " UTC"
             duration = ele[2].text + " hours."
 
             contest = {
