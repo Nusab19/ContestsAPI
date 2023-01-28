@@ -262,13 +262,6 @@ async def CachedCodeforces():
     return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
 
 
-@app.get("/cached/3")
-@app.get("/cached/codeforces")
-async def CachedCodeforces():
-    data = {"ok": True, "data": cachedData.get("codeforces")}
-    return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
-
-
 @app.get("/cached/4")
 @app.get("/cached/hackerearth")
 async def CachedHackerearth():
