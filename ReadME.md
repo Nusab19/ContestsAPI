@@ -1,4 +1,4 @@
-<h3 align="center">An <i>asynchronous</i> API made with FastAPI to grab contests' information from different platforms.</h3>
+<h3 align="center">An <i>asynchronous</i> API made with FastAPI to grab upcoming contests' information from different platforms.</h3>
 
 <p align="center">
 <img height="300px" src="https://te.legra.ph/file/46a2556c0bb2e9ad90e94.jpg">
