@@ -111,4 +111,4 @@ Visit <code>localhost:5000</code> after running locally.
 
 Make sure to give a star if you like it! :D
 
-Made with ❤ by @Nusab19
+Made with ❤ and effort by <a href="https://github.com/Nusab19">@Nusab19</a>
