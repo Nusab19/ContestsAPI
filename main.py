@@ -154,7 +154,8 @@ async def atcoderContests():
         try:
             return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
         finally:
-            cachedData["atcoder"] = data
+            cachedData["atcoder"] = data["data"]
+
 
     except Exception as e:
         data = formatError(e)
@@ -172,7 +173,7 @@ async def codechefContests():
         try:
             return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
         finally:
-            cachedData["codechef"] = data
+            cachedData["codechef"] = data["data"]
 
     except Exception as e:
         data = formatError(e)
@@ -190,7 +191,8 @@ async def codeforcesContests():
         try:
             return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
         finally:
-            cachedData["codeforces"] = data
+            cachedData["codeforces"] = data["data"]
+
 
     except Exception as e:
         data = formatError(e)
@@ -208,7 +210,8 @@ async def hackerEarthContests():
         try:
             return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
         finally:
-            cachedData["hackerearth"] = data
+            cachedData["hackerearth"] = data["data"]
+
 
     except Exception as e:
         data = formatError(e)
@@ -226,7 +229,8 @@ async def tophContests():
         try:
             return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
         finally:
-            cachedData["toph"] = data
+            cachedData["toph"] = data["data"]
+
 
     except Exception as e:
         data = formatError(e)
@@ -330,6 +334,8 @@ async def api_status():
 
 @app.middleware("http")
 async def add_process_time_header(request, func):
+    p = request.client.host
+    #print(f" Request from {p} at {datetime.now()}")
     response = await func(request)
     try:
         return response
