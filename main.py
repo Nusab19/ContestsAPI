@@ -42,8 +42,6 @@ app = FastAPI(
 scheduler = AsyncIOScheduler()
 
 cachedData = {}
-
-
 keyword_platforms = {
     "1": "atcoder",
     "2": "codechef",
