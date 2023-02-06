@@ -94,7 +94,12 @@ Made using FastAPI with python3
 """.strip()
 
     data = {"ok": True, "message": welcomeMessage}
-    return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
+    return Response(
+        content=json.dumps(
+            data,
+            indent=4,
+            default=str),
+        media_type='application/json')
 
 
 # 404 Exception
@@ -118,7 +123,12 @@ async def platformNames():
         "message": list(keyword_platforms.values()),
         "data": dict(keyword_platforms.items())}
 
-    return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
+    return Response(
+        content=json.dumps(
+            data,
+            indent=4,
+            default=str),
+        media_type='application/json')
 
 
 @app.get("/all")
@@ -131,7 +141,12 @@ async def allPlatformContests():
     data.update(dict(zip(y, x)))
 
     try:
-        return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
+        return Response(
+            content=json.dumps(
+                data,
+                indent=4,
+                default=str),
+            media_type='application/json')
     finally:
         del data["ok"]
         cachedData.update(data)
@@ -152,10 +167,14 @@ async def atcoderContests():
         x = await atcoder.getContests(HTTPX_CLIENT)
         data.update({"data": x})
         try:
-            return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
+            return Response(
+                content=json.dumps(
+                    data,
+                    indent=4,
+                    default=str),
+                media_type='application/json')
         finally:
             cachedData["atcoder"] = data["data"]
-
 
     except Exception as e:
         data = formatError(e)
@@ -171,7 +190,12 @@ async def codechefContests():
         x = await codechef.getContests(HTTPX_CLIENT)
         data.update({"data": x})
         try:
-            return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
+            return Response(
+                content=json.dumps(
+                    data,
+                    indent=4,
+                    default=str),
+                media_type='application/json')
         finally:
             cachedData["codechef"] = data["data"]
 
@@ -189,10 +213,14 @@ async def codeforcesContests():
         x = await codeforces.getContests(HTTPX_CLIENT)
         data.update({"data": x})
         try:
-            return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
+            return Response(
+                content=json.dumps(
+                    data,
+                    indent=4,
+                    default=str),
+                media_type='application/json')
         finally:
             cachedData["codeforces"] = data["data"]
-
 
     except Exception as e:
         data = formatError(e)
@@ -208,10 +236,14 @@ async def hackerEarthContests():
         x = await hackerearth.getContests(HTTPX_CLIENT)
         data.update({"data": x})
         try:
-            return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
+            return Response(
+                content=json.dumps(
+                    data,
+                    indent=4,
+                    default=str),
+                media_type='application/json')
         finally:
             cachedData["hackerearth"] = data["data"]
-
 
     except Exception as e:
         data = formatError(e)
@@ -227,10 +259,14 @@ async def tophContests():
         x = await toph.getContests(HTTPX_CLIENT)
         data.update({"data": x})
         try:
-            return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
+            return Response(
+                content=json.dumps(
+                    data,
+                    indent=4,
+                    default=str),
+                media_type='application/json')
         finally:
             cachedData["toph"] = data["data"]
-
 
     except Exception as e:
         data = formatError(e)
@@ -242,42 +278,72 @@ async def tophContests():
 async def all_cached():
     data = {"ok": True}
     data.update(cachedData.copy())
-    return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
+    return Response(
+        content=json.dumps(
+            data,
+            indent=4,
+            default=str),
+        media_type='application/json')
 
 
 @app.get("/cached/1")
 @app.get("/cached/atcoder")
 async def CachedAtcoderContests():
     data = {"ok": True, "data": cachedData.get("atcoder")}
-    return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
+    return Response(
+        content=json.dumps(
+            data,
+            indent=4,
+            default=str),
+        media_type='application/json')
 
 
 @app.get("/cached/2")
 @app.get("/cached/codechef")
 async def CachedCodechef():
     data = {"ok": True, "data": cachedData.get("codechef")}
-    return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
+    return Response(
+        content=json.dumps(
+            data,
+            indent=4,
+            default=str),
+        media_type='application/json')
 
 
 @app.get("/cached/3")
 @app.get("/cached/codeforces")
 async def CachedCodeforces():
     data = {"ok": True, "data": cachedData.get("codeforces")}
-    return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
+    return Response(
+        content=json.dumps(
+            data,
+            indent=4,
+            default=str),
+        media_type='application/json')
 
 
 @app.get("/cached/4")
 @app.get("/cached/hackerearth")
 async def CachedHackerearth():
     data = {"ok": True, "data": cachedData.get("hackerearth")}
-    return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
+    return Response(
+        content=json.dumps(
+            data,
+            indent=4,
+            default=str),
+        media_type='application/json')
 
 
 @app.get("/cached/5")
 @app.get("/cached/toph")
 async def CachedToph():
     data = {"ok": True, "data": cachedData.get("toph")}
-    return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
+    return Response(
+        content=json.dumps(
+            data,
+            indent=4,
+            default=str),
+        media_type='application/json')
 
 
 # For some unknown reason (to me), the code below is having slow response problem.
@@ -323,19 +389,24 @@ _tempData = {"count": 0, "startTime": time.time()}
 
 @app.get("/status")
 async def api_status():
-    uptime = (time.time() - _tempData["startTime"])/3600
+    uptime = (time.time() - _tempData["startTime"]) / 3600
     reqCount = _tempData["count"]
     data = {
         "uptime": f"{uptime:.2f} hours.",
         "requestsCount": reqCount
     }
-    return Response(content=json.dumps(data, indent=4, default=str), media_type='application/json')
+    return Response(
+        content=json.dumps(
+            data,
+            indent=4,
+            default=str),
+        media_type='application/json')
 
 
 @app.middleware("http")
 async def add_process_time_header(request, func):
     p = request.client.host
-    #print(f" Request from {p} at {datetime.now()}")
+    # print(f" Request from {p} at {datetime.now()}")
     response = await func(request)
     try:
         return response

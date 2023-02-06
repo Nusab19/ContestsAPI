@@ -25,7 +25,7 @@ def extract_data(r):
         startTime = datetime.strftime(
             datetime.utcfromtimestamp(startSec),
             "%d-%m-%Y %H:%M:%S") + " UTC"
-        url = f"https://toph.co/{endpoint}"
+        url = f"https://toph.co{endpoint}"
         contest = {
             "name": name,
             "url": url,
@@ -36,13 +36,15 @@ def extract_data(r):
 
 
 def extractTime(r):
-    soup = BeautifulSoup(r.content, "html5lib")
-    a = soup.find(
-        "div", attrs={"class": "panel__body artifact"}).findAll("strong")
+    a = BeautifulSoup(
+        r.content, "html5lib").find(
+        "div", attrs={
+            "class": "panel__body artifact"}).findAll("p")
 
-    # date, when, duration = [i.text for i in a]
-    duration = a[-1].text
-    return duration
+    for s in a:
+        if "will run for" in str(s).lower():
+            duration = s.findAll("strong")[-1].text
+            return duration
 
 
 async def getContests(ses: httpx.AsyncClient):
