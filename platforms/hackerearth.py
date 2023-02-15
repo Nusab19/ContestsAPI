@@ -1,10 +1,16 @@
 import httpx
 import json
 import pytz
+import asyncio
+
 from datetime import datetime
+try:
+    from helpers.format_time import secondsToTime, timeToSeconds
+except ImportError:
+    from .helpers.format_time import secondsToTime, timeToSeconds
 
 
-async def getContests(ses: httpx.AsyncClient, limit: int = None):
+async def getContests(ses: httpx.AsyncClient):
     r = await ses.get(
         "https://www.hackerearth.com/chrome-extension/events/")
     allContests = []
@@ -25,24 +31,8 @@ async def getContests(ses: httpx.AsyncClient, limit: int = None):
                         start, '%Y-%m-%dT%H:%M:%S%z').astimezone(pytz.utc).strftime('%Y-%m-%dT%H:%M:%S%z')
                     td = datetime.strptime(
                         end, '%Y-%m-%dT%H:%M:%S%z') - datetime.strptime(start, '%Y-%m-%dT%H:%M:%S%z')
-                    if td.days and td.seconds:
-                        duration = f" {td.days} Days & {td.seconds//3600} hours."
-                    elif td.days:
-                        duration = f"{td.days} Days"
-                    elif td.seconds and td.seconds > 3600:
-                        hours = ""
-                        mins = ""
-                        if (td.seconds) // 3600 < 10:
-                            hours = "0" + str((td.seconds) // 3600)
-
-                        else:
-                            hours = td.seconds // 3600
-
-                        if (td.seconds // 60) % 60 < 10:
-                            mins = "0" + str((td.seconds // 60) % 60)
-                        else:
-                            mins = (td.seconds // 60) % 60
-                        duration = f"{hours} : {mins} hours."
+                    durationSec = int(td.total_seconds())
+                    duration = secondsToTime(durationSec)
 
                     startTime = startTime.replace('T', ' ')[:-5] + " UTC"
 
@@ -50,14 +40,20 @@ async def getContests(ses: httpx.AsyncClient, limit: int = None):
                         "name": name,
                         "url": url,
                         "startTime": startTime,
-                        "duration": duration.strip()
+                        "duration": duration,
+                        "durationSeconds": durationSec
                     }
 
-                    if contest.get("duration"):
-                        allContests.append(contest)
+                    allContests.append(contest)
 
                 except Exception as e:
-                    print(e)
                     continue
 
     return allContests
+
+
+if __name__ == "__main__":
+    print("Only running one file.\n")
+    a = asyncio.run(getContests(httpx.AsyncClient(timeout=13)))
+    for j in a:
+        print(j)

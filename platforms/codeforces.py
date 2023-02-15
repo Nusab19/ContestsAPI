@@ -1,6 +1,11 @@
+import asyncio
 import httpx
 import json
 from datetime import datetime
+try:
+    from helpers.format_time import secondsToTime, timeToSeconds
+except ImportError:
+    from .helpers.format_time import secondsToTime, timeToSeconds
 
 
 async def getContests(ses: httpx.AsyncClient):
@@ -20,13 +25,22 @@ async def getContests(ses: httpx.AsyncClient):
                     datetime.utcfromtimestamp(startSec),
                     "%d-%m-%Y %H:%M:%S") + " UTC"
 
-                duration = f"0{con.get('durationSeconds') // 3600 }:00 hours."
+                durationSec = con.get('durationSeconds')
+                duration = secondsToTime(durationSec)
                 contest = {
                     "name": name,
                     "url": url,
                     "startTime": startTime,
-                    "duration": duration
+                    "duration": duration,
+                    "durationSeconds": durationSec
                 }
                 allContests.append(contest)
 
     return allContests[::-1]
+
+
+if __name__ == "__main__":
+    print("Only running one file.\n")
+    a = asyncio.run(getContests(httpx.AsyncClient(timeout=13)))
+    for j in a:
+        print(j)
