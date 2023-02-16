@@ -1,13 +1,23 @@
 <h3 align="center">An <i>asynchronous</i> API made with FastAPI to grab upcoming contests' information from different platforms.</h3>
 
 <p align="center">
-<img height="300px" src="https://te.legra.ph/file/46a2556c0bb2e9ad90e94.jpg">
+<img height="333px" src="https://te.legra.ph/file/46a2556c0bb2e9ad90e94.jpg">
 </p>
 
 <a target="_blank" href="https://github.com/Nusab19/ContestsAPI"><img src="https://img.shields.io/github/stars/Nusab19/ContestsAPI"/></a>
 <a target="_blank" href="https://github.com/Nusab19/ContestsAPI"><img src="https://img.shields.io/github/last-commit/Nusab19/ContestsAPI" />
 </a>
 
+<h1>Warning</h1>
+<p>
+<b>If you want to use this API in production, it is highly recommended to <i>fork</i> this repository.</b>
+<br>
+Beacause I am adding new platforms regularly and code is improving continuously.
+<br>
+There will come new versions of this API soon. <b>(After May 23, 2023)</b>
+<br>
+So, fork this repo so your project doesn't get hampered by new changes.
+</p>
 
 <h1>Available Platforms</h1>
 
@@ -16,17 +26,13 @@
 <li>CodeChef</li>
 <li>Codeforces</li>
 <li>HackerEarth</li>
+<li>LeetCode</li>
 <li>Toph</li>
 </ol>
 
 <p align="center">
-<img height="100px" src="https://te.legra.ph/file/8f3c11d29137158c58e6a.png">
-<img height="100px" src="https://te.legra.ph/file/fd1d40f90734a028a1e76.png">
+<img height="333px" src="https://te.legra.ph/file/910ff0a18fb5bbd4a04ee.jpg">
 <br>
-<img height="100px" src="https://telegra.ph/file/bf1b768d37b0d2dabb049.png">
-<img height="100px" src="https://te.legra.ph/file/90ab43168f2152a1ea0e0.png">
-<br>
-<img height="77px" src="https://telegra.ph/file/78799a5bb917998a0af9b.png">
 </p>
 
 
@@ -52,24 +58,31 @@ The structure is like:
 
 Example:
 
-https://api.nusab.repl.co/cached/2   ( Same as `/cached/codechef`)
+https://api.nusab.repl.co/cached/2   [ <code>2 == codechef</code> ]
 
-Response:
+See <code>/platforms</code> for numeric names of each platform.
+
+Sample Response:
 <pre>
-[
-    {
-        "name": "Starters 79",
-        "contestUrl": "https://www.codechef.com/START79",
-        "startTime": "2023-02-22 02:30:00 UTC",
-        "duration": "3 hours."
-    },
-    {
-        "name": "Starters 78",
-        "contestUrl": "https://www.codechef.com/START78",
-        "startTime": "2023-02-15 02:30:00 UTC",
-        "duration": "3 hours."
-    }
-]
+{
+    "ok": true,
+    "data": [
+        {
+            "name": "Starters 78",
+            "url": "https://www.codechef.com/START78",
+            "startTime": "22-02-23 14:30:00 UTC",
+            "duration": "3 hours",
+            "durationSeconds": 10800
+        },
+        {
+            "name": "Starters 79",
+            "url": "https://www.codechef.com/START79",
+            "startTime": "01-03-23 14:30:00 UTC",
+            "duration": "3 hours",
+            "durationSeconds": 10800
+        }
+    ]
+}
 </pre>
 
 
