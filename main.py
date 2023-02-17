@@ -403,7 +403,6 @@ async def api_status():
 @app.middleware("http")
 async def add_process_time_header(request, func):
     p = request.client.host
-    # print(f" Request from {p} at {datetime.now()}")
     response = await func(request)
     try:
         return response

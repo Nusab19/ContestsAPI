@@ -1,6 +1,6 @@
-import httpx
 import json
 import pytz
+import httpx
 import asyncio
 
 from datetime import datetime
@@ -34,7 +34,8 @@ async def getContests(ses: httpx.AsyncClient):
                     durationSec = int(td.total_seconds())
                     duration = secondsToTime(durationSec)
 
-                    startTime = startTime.replace('T', ' ')[:-5] + " UTC"
+                    startTime = datetime.strptime(startTime.replace(
+                        'T', ' ')[:-5], "%Y-%m-%d %H:%M:%S").strftime("%d-%m-%Y %H:%M:%S UTC")
 
                     contest = {
                         "name": name,
@@ -47,6 +48,7 @@ async def getContests(ses: httpx.AsyncClient):
                     allContests.append(contest)
 
                 except Exception as e:
+                    print(e)
                     continue
 
     return allContests

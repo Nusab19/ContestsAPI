@@ -1,6 +1,7 @@
-import asyncio
-import httpx
 import json
+import httpx
+import asyncio
+
 from datetime import datetime
 try:
     from helpers.format_time import secondsToTime, timeToSeconds
@@ -17,13 +18,12 @@ async def getContests(ses: httpx.AsyncClient):
         contests = jr.get("result")
         for con in contests:
             if con.get("phase") == "BEFORE":
-                plat = "CodeForces"
                 name = con["name"]
                 url = "https://codeforces.com/contests/" + str(con["id"])
                 startSec = con["startTimeSeconds"]
                 startTime = datetime.strftime(
                     datetime.utcfromtimestamp(startSec),
-                    "%d-%m-%Y %H:%M:%S") + " UTC"
+                    "%d-%m-%Y %H:%M:%S UTC")
 
                 durationSec = con.get('durationSeconds')
                 duration = secondsToTime(durationSec)

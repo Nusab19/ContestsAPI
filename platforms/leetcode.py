@@ -1,6 +1,6 @@
-import asyncio
-import httpx
 import json
+import httpx
+import asyncio
 
 from bs4 import BeautifulSoup
 from datetime import datetime
@@ -11,9 +11,7 @@ except ImportError:
 
 
 def extract_data(r):
-    # use `lxml` instead of `html.parser`
-    soup = BeautifulSoup(r, "html.parser")
-    # I used `html5lib` for its wide range of device support.
+    soup = BeautifulSoup(r, "lxml")
 
     a = soup.find("script", id="__NEXT_DATA__")
     data = json.loads(a.text)[

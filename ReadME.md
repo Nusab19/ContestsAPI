@@ -58,7 +58,7 @@ The structure is like:
 
 Example:
 
-https://api.nusab.repl.co/cached/2   [ <code>2 == codechef</code> ]
+https://api.nusab.repl.co/cached/2   <code>2 == codechef</code>
 
 See <code>/platforms</code> for numeric names of each platform.
 
@@ -70,14 +70,14 @@ Sample Response:
         {
             "name": "Starters 78",
             "url": "https://www.codechef.com/START78",
-            "startTime": "22-02-23 14:30:00 UTC",
+            "startTime": "22-02-2023 14:30:00 UTC",
             "duration": "3 hours",
             "durationSeconds": 10800
         },
         {
             "name": "Starters 79",
             "url": "https://www.codechef.com/START79",
-            "startTime": "01-03-23 14:30:00 UTC",
+            "startTime": "01-03-2023 14:30:00 UTC",
             "duration": "3 hours",
             "durationSeconds": 10800
         }

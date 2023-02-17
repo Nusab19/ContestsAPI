@@ -1,6 +1,6 @@
-import asyncio
+import pytz
 import httpx
-import json
+import asyncio
 
 from datetime import datetime
 try:
@@ -10,36 +10,35 @@ except ImportError:
 
 
 async def getContests(ses: httpx.AsyncClient):
-    # Codechef gives access to their API to limited users
-    # Had to use this API as web-scrapping didn't work in CodeChef either
-    # They need to run js to ensure their Webpage
-    # But I'll fetch the js file and figure out the hidden API soon... :3
-    # For now, this is the alternative
-    r = await ses.get("https://kontests.net/api/v1/code_chef")
+    r = (await ses.get('https://www.codechef.com/api/list/contests/all')).json()
+
+    if r.get("status") != "success":
+        return []
+
     allContests = []
+    contests = r["future_contests"]
 
-    if r.status_code == 200:
-        contests = json.loads(r.text)
-        for con in contests:
-            name = con["name"]
-            url = con["url"]
-            startTime = con["start_time"]
-            startTime = datetime.strptime(
-                startTime, "%Y-%m-%d %H:%M:%S %Z").strftime("%d-%m-%y %H:%M:%S %Z") + "UTC"
+    for i in contests:
+        name = i["contest_name"]
+        url = f"https://www.codechef.com/{i['contest_code']}"
+        startIso = i["contest_start_date_iso"]
+        startTime = datetime.fromisoformat(startIso).astimezone(
+            pytz.utc).strftime("%d-%m-%Y %H:%M:%S UTC")
+        durationMin = i["contest_duration"] + " minutes"
+        durationSec = timeToSeconds(durationMin)
+        duration = secondsToTime(durationSec)
 
-            durationSec = int(con['duration'])
-            duration = secondsToTime(durationSec)
-            contest = {
-                "name": name,
-                "url": url,
-                "startTime": startTime,
-                "duration": duration,
-                "durationSeconds": durationSec
-            }
-            allContests.append(contest)
+        contest = {
+            "name": name,
+            "url": url,
+            "startTime": startTime,
+            "duration": duration,
+            "durationSeconds": durationSec
+        }
 
-    return allContests[::-1]
+        allContests.append(contest)
 
+    return allContests
 
 if __name__ == "__main__":
     print("Only running one file.\n")

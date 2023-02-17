@@ -10,7 +10,7 @@ except ImportError:
 
 
 def extract_data(r):
-    soup = BeautifulSoup(r.content, "html5lib")
+    soup = BeautifulSoup(r.content, "lxml")
     x = soup.findAll("div", attrs={"class": "flow"})
 
     allContests = []
@@ -42,7 +42,7 @@ def extract_data(r):
 
 def extractTime(r):
     a = BeautifulSoup(
-        r.content, "html5lib").find(
+        r.content, "lxml").find(
         "div", attrs={
             "class": "panel__body artifact"}).findAll("p")
 

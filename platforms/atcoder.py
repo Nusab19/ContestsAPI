@@ -11,7 +11,7 @@ except ImportError:
 
 
 def extract_data(r):
-    soup = BeautifulSoup(r, "html5lib")
+    soup = BeautifulSoup(r, "lxml")
     return soup.select("#contest-table-upcoming tbody tr")
 
 
@@ -24,8 +24,6 @@ async def getContests(ses: httpx.AsyncClient):
 
         for con in contests:
             ele = con.find_all("td")
-            plat = "AtCoder"
-
             name = " ".join(
                 ele[1].text.strip()[
                     ele[1].text.strip().index("\n") +
