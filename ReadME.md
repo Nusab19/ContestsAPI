@@ -120,6 +120,8 @@ pip install -r requirements.txt
 python main.py
 ```
 
+It'll be better to use <code>uvicorn main:app --reload --port 5000 --host 0.0.0.0</code> instead of <code>python main.py</code>
+
 Visit <code>localhost:5000</code> after running locally.
 
 Make sure to give a star if you like it! :D
