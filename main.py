@@ -12,7 +12,7 @@ import uvicorn
 
 
 # Local Assets
-from platforms import atcoder, codechef, codeforces, hackerearth, leetcode, toph
+from platforms import atcoder, codechef, codeforces, hackerearth, hackerrank, leetcode, toph
 
 
 HTTPX_CLIENT = httpx.AsyncClient(timeout=300)
@@ -47,8 +47,9 @@ keyword_platforms = {
     "2": "codechef",
     "3": "codeforces",
     "4": "hackerearth",
-    "5": "leetcode",
-    "6": "toph"
+    "5": "hackerrank",
+    "6": "leetcode",
+    "7": "toph"
 }
 
 
@@ -57,8 +58,9 @@ platform_funcs = {
     "2": codechef.getContests,
     "3": codeforces.getContests,
     "4": hackerearth.getContests,
-    "5": leetcode.getContests,
-    "6": toph.getContests
+    "5": hackerrank.getContests,
+    "6": leetcode.getContests,
+    "7": toph.getContests
 }
 
 
@@ -252,6 +254,29 @@ async def hackerEarthContests():
 
 
 @app.get("/5")
+@app.get("/hackerrank")
+async def hackerrankContests():
+    try:
+        data = {"ok": True}
+        x = await hackerrank.getContests(HTTPX_CLIENT)
+        data.update({"data": x})
+        try:
+            return Response(
+                content=json.dumps(
+                    data,
+                    indent=4,
+                    default=str),
+                media_type='application/json')
+        finally:
+            cachedData["hackerrank"] = data["data"]
+
+    except Exception as e:
+        data = formatError(e)
+        return Response(content=json.dumps(data, indent=4, default=str),
+                        media_type='application/json')
+
+
+@app.get("/6")
 @app.get("/leetcode")
 async def leetCodeContests():
     try:
@@ -274,7 +299,7 @@ async def leetCodeContests():
                         media_type='application/json')
 
 
-@app.get("/6")
+@app.get("/7")
 @app.get("/toph")
 async def tophContests():
     try:
@@ -358,6 +383,18 @@ async def CachedHackerearth():
 
 
 @app.get("/cached/5")
+@app.get("/cached/hackerrank")
+async def CachedHackerrank():
+    data = {"ok": True, "data": cachedData.get("hackerrank")}
+    return Response(
+        content=json.dumps(
+            data,
+            indent=4,
+            default=str),
+        media_type='application/json')
+
+
+@app.get("/cached/6")
 @app.get("/cached/leetcode")
 async def CachedLeetCode():
     data = {"ok": True, "data": cachedData.get("leetcode")}
@@ -369,7 +406,7 @@ async def CachedLeetCode():
         media_type='application/json')
 
 
-@app.get("/cached/6")
+@app.get("/cached/7")
 @app.get("/cached/toph")
 async def CachedToph():
     data = {"ok": True, "data": cachedData.get("toph")}
