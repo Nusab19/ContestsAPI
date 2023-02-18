@@ -19,13 +19,14 @@ There will come new versions of this API soon. <b>(After May 23, 2023)</b>
 So, fork this repo so your project doesn't get hampered by new changes.
 </p>
 
-<h1>Available Platforms</h1>
+<h1>7 Available Platforms</h1>
 
 <ol>
 <li>Atcoder</li>
 <li>CodeChef</li>
 <li>Codeforces</li>
 <li>HackerEarth</li>
+<li>HackerRank</li>
 <li>LeetCode</li>
 <li>Toph</li>
 </ol>
