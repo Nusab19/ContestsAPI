@@ -1,4 +1,4 @@
-<h3 align="center">An <i>asynchronous</i> API made with FastAPI to grab upcoming contests' information from different platforms.</h3>
+<h3 align="center">A <b>totally</b> <i>asynchronous</i> API made with FastAPI and WebScrapping to grab upcoming contests' information from different platforms.</h3>
 
 <p align="center">
 <img height="333px" src="https://te.legra.ph/file/46a2556c0bb2e9ad90e94.jpg">
@@ -19,13 +19,14 @@ There will come new versions of this API soon. <b>(After May 23, 2023)</b>
 So, fork this repo so your project doesn't get hampered by new changes.
 </p>
 
-<h1>Available Platforms</h1>
+<h1>7 Available Platforms</h1>
 
 <ol>
 <li>Atcoder</li>
 <li>CodeChef</li>
 <li>Codeforces</li>
 <li>HackerEarth</li>
+<li>HackerRank</li>
 <li>LeetCode</li>
 <li>Toph</li>
 </ol>
@@ -120,7 +121,7 @@ pip install -r requirements.txt
 python main.py
 ```
 
-It'll be better to use <code>uvicorn main:app --reload --port 5000 --host 0.0.0.0</code> instead of <code>python main.py</code>
+You may also use <code>uvicorn main:app --reload --port 5000 --host 0.0.0.0</code> instead of <code>python main.py</code>
 
 Visit <code>localhost:5000</code> after running locally.
 
