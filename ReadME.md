@@ -1,7 +1,7 @@
 <h3 align="center">A <b>totally</b> <i>asynchronous</i> API made with FastAPI and WebScrapping to grab upcoming contests' information from different platforms.</h3>
 
 <p align="center">
-<img height="333px" src="https://te.legra.ph/file/46a2556c0bb2e9ad90e94.jpg">
+<img height="300px" src="https://te.legra.ph/file/46a2556c0bb2e9ad90e94.jpg">
 </p>
 
 <a target="_blank" href="https://github.com/Nusab19/ContestsAPI"><img src="https://img.shields.io/github/stars/Nusab19/ContestsAPI"/></a>
@@ -32,7 +32,7 @@ So, fork this repo so your project doesn't get hampered by new changes.
 </ol>
 
 <p align="center">
-<img height="333px" src="https://te.legra.ph/file/1b5b3f8fe4da2fca9f223.jpg">
+<img height="300px" src="https://te.legra.ph/file/1b5b3f8fe4da2fca9f223.jpg">
 <br>
 </p>
 
