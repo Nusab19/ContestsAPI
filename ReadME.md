@@ -32,7 +32,7 @@ So, fork this repo so your project doesn't get hampered by new changes.
 </ol>
 
 <p align="center">
-<img height="333px" src="https://te.legra.ph/file/910ff0a18fb5bbd4a04ee.jpg">
+<img height="333px" src="https://te.legra.ph/file/1b5b3f8fe4da2fca9f223.jpg">
 <br>
 </p>
 
