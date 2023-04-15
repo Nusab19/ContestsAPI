@@ -34,8 +34,13 @@ async def getContests(ses: httpx.AsyncClient):
                     durationSec = int(td.total_seconds())
                     duration = secondsToTime(durationSec)
 
-                    startTime = datetime.strptime(startTime.replace(
-                        'T', ' ')[:-5], "%Y-%m-%d %H:%M:%S").strftime("%d-%m-%Y %H:%M:%S UTC")
+                    startTime = datetime.strptime(
+                        startTime.replace(
+                            'T',
+                            ' ')[
+                            :-
+                            5],
+                        "%Y-%m-%d %H:%M:%S").strftime("%d-%m-%Y %H:%M:%S UTC")
 
                     contest = {
                         "name": name,

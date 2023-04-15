@@ -21,11 +21,18 @@ async def getContests(ses: httpx.AsyncClient):
         name = i["name"]
         url = f"" + i["slug"]
         startTime = datetime.strptime(
-            i["get_starttimeiso"], '%Y-%m-%dT%H:%M:%SZ').strftime('%d-%m-%Y %H:%M:%S UTC')
+            i["get_starttimeiso"],
+            '%Y-%m-%dT%H:%M:%SZ').strftime('%d-%m-%Y %H:%M:%S UTC')
         endTime = datetime.strptime(
-            i["get_endtimeiso"], '%Y-%m-%dT%H:%M:%SZ').strftime('%d-%m-%Y %H:%M:%S UTC')
-        durationSec = int((datetime.strptime(endTime, '%d-%m-%Y %H:%M:%S %Z') -
-                          datetime.strptime(startTime, '%d-%m-%Y %H:%M:%S %Z')).total_seconds())
+            i["get_endtimeiso"],
+            '%Y-%m-%dT%H:%M:%SZ').strftime('%d-%m-%Y %H:%M:%S UTC')
+        durationSec = int(
+            (datetime.strptime(
+                endTime,
+                '%d-%m-%Y %H:%M:%S %Z') -
+                datetime.strptime(
+                startTime,
+                '%d-%m-%Y %H:%M:%S %Z')).total_seconds())
         duration = secondsToTime(durationSec)
         contest = {
             "name": name,

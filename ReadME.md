@@ -59,7 +59,7 @@ The structure is like:
 
 Example:
 
-https://api.nusab.repl.co/cached/2   <code>2 == codechef</code>
+https://contestsapi.onrender.com/cached/2   <code> 2 == codechef</code>
 
 See <code>/platforms</code> for numeric names of each platform.
 
@@ -109,10 +109,11 @@ Just put the method's name after <code>/cached/</code>.
 
 <code>/status</code> - A brief status of the API. 
 
-<p>Live API: https://api.nusab.repl.co</p>
+<br>
+<h2>Live API</h2>
+<a href=""https://contestsapi.onrender.com/>contestsapi.onrender.com</a>
 
 <h1>Installation</h1>
-
 
 ```
 git clone https://github.com/Nusab19/ContestsAPI
