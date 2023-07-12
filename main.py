@@ -9,7 +9,7 @@ import time
 import httpx
 import asyncio
 import uvicorn
-
+import multiprocessing
 
 # Local Assets
 from platforms import atcoder, codechef, codeforces, hackerearth, hackerrank, leetcode, toph
@@ -445,6 +445,15 @@ async def add_process_time_header(request, func):
         return response
     finally:
         _tempData["count"] += 1
+
+
+
+def importKeepAlive():
+    import keepalive
+
+
+multiprocessing.Process(target=importKeepAlive).start()
+
 
 
 if __name__ == "__main__":
