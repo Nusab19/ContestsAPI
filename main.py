@@ -421,12 +421,30 @@ async def CachedToph():
 _tempData = {"count": 0, "startTime": time.time()}
 
 
+def secondsToTime(s):
+  m, s = divmod(s, 60)
+  h, m = divmod(m, 60)
+  d, h = divmod(h, 24)
+  result = ""
+  if d > 0:
+    result += f"{d} day{'s' if d > 1 else ''}"
+  if h > 0:
+    result += f" {h} hour{'s' if h > 1 else ''}"
+  if m > 0:
+    result += f" {m} minute{'s' if m > 1 else ''}"
+  if not result:
+    result = "0 minutes"
+  return result.strip()
+
+
+
+
 @app.get("/status")
 async def api_status():
-    uptime = (time.time() - _tempData["startTime"]) / 3600
+    uptime = time.time() - _tempData["startTime"]
     reqCount = _tempData["count"]
     data = {
-        "uptime": f"{uptime:.2f} hours.",
+        "uptime": secondsToTime(uptime),
         "requestsCount": reqCount
     }
     return Response(
