@@ -3,8 +3,8 @@ uvicorn==0.20.0
 bs4==0.0.1
 httpx==0.23.1
 pytz==2022.7
-lxml==4.9.2
+# lxml==4.9.2
 # `lxml` is way better. If you get error when installing lxml, you gotta use the below package.
 # I'll make this easier to edit with an config file. Till then, Code and Sleep!
-# html5lib==1.1 
+html5lib==1.1 
 apscheduler==3.9.1.post1
