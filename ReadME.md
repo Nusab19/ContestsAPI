@@ -4,9 +4,6 @@ A better approach has been made [Contest Hive](https://contest-hive.vercel.app/)
 
 Use Contest Hive API for production purposes.
 
-
-## Old Readme
-
 <h3 align="center">A <b>totally</b> <i>asynchronous</i> API made with FastAPI to grab upcoming contests' information from different platforms.</h3>
 
 <p align="center">
